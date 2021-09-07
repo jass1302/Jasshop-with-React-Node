@@ -8,7 +8,8 @@ const data = {
             price: 149,
             brand: 'JassBrand',
             rating: 4.5,
-            numReviews: 10,
+            numReviews: 57,
+            stock: 10,
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
@@ -19,7 +20,8 @@ const data = {
             price: 99,
             brand: 'JassBrand',
             rating: 4.5,
-            numReviews: 10,
+            numReviews: 25,
+            stock: 5,
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
@@ -30,7 +32,8 @@ const data = {
             price: 99,
             brand: 'JassBrand',
             rating: 4.5,
-            numReviews: 10,
+            numReviews: 7,
+            stock: 0,
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
@@ -41,7 +44,8 @@ const data = {
             price: 399,
             brand: 'JassBrand',
             rating: 4.5,
-            numReviews: 10,
+            numReviews: 14,
+            stock: 15,
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
@@ -52,7 +56,8 @@ const data = {
             price: 190,
             brand: 'JassBrand',
             rating: 4.5,
-            numReviews: 10,
+            numReviews: 23,
+            stock: 1,
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
@@ -64,6 +69,7 @@ const data = {
             brand: 'JassBrand',
             rating: 4.5,
             numReviews: 10,
+            stock: 0,
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
     ]
