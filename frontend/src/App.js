@@ -1,22 +1,31 @@
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import {BrowserRouter, Link, Route} from 'react-router-dom';
 import CartScreen from './screens/CartScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 
 function App() {
+  const cart = useSelector(state=> state.cart);
+  const {cartItems} = cart;
   return (
     <BrowserRouter>
     <div className="grid-container">
       <header className="row">
         <div>
-          <a className="brand" href="/">JasShop</a>
+          <Link className="brand" to="/">JasShop</Link>
         </div>
         <div>
-          <a href="/cart">Carrito</a>
-        </div>
-        <div>
-          <a href="/signin">Ingresar</a>
+          <Link to="/cart">Carrito
+          {
+            cartItems.length > 0 // Si se cumple esto
+            ? // Entonces '?'
+            <span className="badge">{cartItems.length}</span> //Hacemos esto
+            : // De lo contrario
+            <div></div> //Esto otro
+          }
+          </Link>
+          <Link to="/signin">Ingresar</Link>
         </div>
       </header>
       <main>
