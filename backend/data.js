@@ -1,7 +1,24 @@
+import bcrypt from 'bcryptjs';
+
 const data = {
+    users:[
+        {
+            name: 'Jassiel',
+            email: 'admin@jasshop.com',
+            pass: bcrypt.hashSync('rootpass',8),
+            isAdmin: true,
+        },
+        {
+            name: 'Ernesto',
+            email: 'test@jasshop.com',
+            pass: bcrypt.hashSync('rootpass',8),
+            isAdmin: false,
+        },
+
+    ],
     products: [
         {
-            _id: '1',
+            //_id: '1',
             name: 'Playera de Pikáchu',
             category: 'Shirts',
             image: '/images/p1.jpg',
@@ -13,7 +30,7 @@ const data = {
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
-            _id: '2',
+            //_id: '2',
             name: 'Playera de Pichu',
             category: 'Shirts',
             image: '/images/p2.jpg',
@@ -25,7 +42,7 @@ const data = {
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
-            _id: '3',
+            //_id: '3',
             name: 'Playera de Raichu',
             category: 'Shirts',
             image: '/images/p3.jpg',
@@ -37,7 +54,7 @@ const data = {
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
-            _id: '4',
+            //_id: '4',
             name: 'Playera de Charizard',
             category: 'Shirts',
             image: '/images/p4.jpg',
@@ -49,7 +66,7 @@ const data = {
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
-            _id: '5',
+            //_id: '5',
             name: 'Playera de Gengar',
             category: 'Shirts',
             image: '/images/p5.jpg',
@@ -61,7 +78,7 @@ const data = {
             desc: 'Diseñada por el mismísimo Satoshi Tajiri'
         },
         {
-            _id: '6',
+            //_id: '6',
             name: 'Tazita de uWu',
             category: 'Mugs',
             image: '/images/p6.jpg',
