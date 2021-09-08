@@ -6,7 +6,7 @@ import User from '../models/userModel.js';
 const userRouter = expres.Router();
 
 userRouter.get('/seed', expressAsyncHandler (async (req, res) =>{
-    await User.remove({});
+   // await User.remove({});
     const createdUsers = await User.insertMany(
         data.users
     );
