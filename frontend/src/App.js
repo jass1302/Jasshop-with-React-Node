@@ -22,7 +22,7 @@ function App() {
             ? // Entonces '?'
             <span className="badge">{cartItems.length}</span> //Hacemos esto
             : // De lo contrario
-            <div></div> //Esto otro
+            <></> //Esto otro
           }
           </Link>
           <Link to="/signin">Ingresar</Link>
