@@ -19,13 +19,13 @@ export const isAuth = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET || 'replaceforsomethingsecret',
       (err, decode) => {
         if (err) {
-          req.status(401).send({ message: 'Invalid Token' });
+          res.status(401).send({ message: 'Invalid Token' });
         } else {
           req.user = decode;
           next();
         }
       });
   } else {
-    req.status(401).send({ message: 'No token' });
+    res.status(401).send({ message: 'No token' });
   }
 }
