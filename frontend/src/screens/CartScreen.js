@@ -28,43 +28,45 @@ function CartScreen(props) {
     return (
         <div className="row top">
             <div className="col-2">
-                <h1>Carrito de compras</h1>
-                {
-                    cartItems.length === 0
-                        ?
-                        <MessageBox>
-                            El carrito está vacío. <Link to="/">Regresa a la página principal.</Link>
-                        </MessageBox>
-                        :
-                        <ul>{cartItems.map((it) => (
-                            <li key={it.product}>
-                                <div className="row">
-                                    <div>
-                                        <img src={it.img} alt={it.name} className="small"></img>
+                <div className="card card-body">
+                    <h1>Carrito de compras</h1>
+                    {
+                        cartItems.length === 0
+                            ?
+                            <MessageBox>
+                                El carrito está vacío. <Link to="/">Regresa a la página principal.</Link>
+                            </MessageBox>
+                            :
+                            <ul>{cartItems.map((it) => (
+                                <li key={it.product}>
+                                    <div className="row">
+                                        <div>
+                                            <img src={it.img} alt={it.name} className="small"></img>
+                                        </div>
+                                        <div className="min-30">
+                                            <Link to={`/product/${it.product}`}>{it.name}</Link>
+                                        </div>
+                                        <div>
+                                            <select
+                                                value={it.qty}
+                                                onChange={(e) => dispatch(addToCart(it.product, Number(e.target.value)))}>
+                                                {
+                                                    [...Array(it.stock).keys()].map(
+                                                        (x) => (<option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                        ))
+                                                }
+                                            </select>
+                                        </div>
+                                        <div>${it.price}</div>
+                                        <div>
+                                            <button type="button"
+                                                onClick={() => removeFromCartHandler(it.product)}>Borrar</button>
+                                        </div>
                                     </div>
-                                    <div className="min-30">
-                                        <Link to={`/product/${it.product}`}>{it.name}</Link>
-                                    </div>
-                                    <div>
-                                        <select
-                                            value={it.qty}
-                                            onChange={(e) => dispatch(addToCart(it.product, Number(e.target.value)))}>
-                                            {
-                                                [...Array(it.stock).keys()].map(
-                                                    (x) => (<option key={x + 1} value={x + 1}>{x + 1}</option>
-                                                    ))
-                                            }
-                                        </select>
-                                    </div>
-                                    <div>${it.price}</div>
-                                    <div>
-                                        <button type="button"
-                                            onClick={() => removeFromCartHandler(it.product)}>Borrar</button>
-                                    </div>
-                                </div>
-                            </li>))}
-                        </ul>
-                }
+                                </li>))}
+                            </ul>
+                    }
+                </div>
             </div>
             <div className="col-1">
                 <div className="card card-body">
