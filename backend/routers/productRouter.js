@@ -24,7 +24,7 @@ productRouter.get('/:id', expressAsyncHandler(
         if (product) {
             res.send(product);
         }else{
-            res.status(404).send({message: "Producto no encontrado"});
+            res.status(404).send('Producto no encontrado');
         }
     }
 ));

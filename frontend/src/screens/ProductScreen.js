@@ -26,7 +26,7 @@ function ProductScreen(props) {
                     <Link to="/">Volver a los resultados</Link>
                     <div className="row top">
                         <div className="col-2">
-                            <img src={product.image} alt={product.name}></img>
+                            <img className="large" src={product.image} alt={product.name}></img>
                         </div>
                         <div className="col-1">
                             <ul>

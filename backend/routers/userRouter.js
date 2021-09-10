@@ -19,9 +19,7 @@ userRouter.post('/signin', expressAsyncHandler(
     async (req, res) =>{
         const user = await User.findOne({email: req.body.email});
         if (user) {
-            console.log("Usuario encontrado");
             if (await bcrypt.compareSync(req.body.password, user.pass)) {
-                console.log("Pass correcta");
                 res.send({
                     _id: user._id,
                     name: user.name,
@@ -32,7 +30,22 @@ userRouter.post('/signin', expressAsyncHandler(
                 return;
             }
         }
-        res.send(401).send({message: "Usuario o contraseña invalidos"});
+        res.status(401).send({message: 'Usuario o contraseña invalidos'});
     }
 ));
+
+userRouter.post('/signup',expressAsyncHandler(async(req, res) =>{
+        const user = new User({name: req.body.name, email: req.body.email,
+        pass: bcrypt.hashSync(req.body.password,8)});
+        const createdUser = await user.save();
+        res.send(
+            {_id: createdUser._id,
+            name: createdUser.name,
+            email: createdUser.email,
+            isAdmin: createdUser.isAdmin,
+            token: generateToken(createdUser)}
+        );
+
+    }));
+
 export default userRouter;

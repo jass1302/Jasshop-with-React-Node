@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signinAction } from '../actions/userActions';
+import { registerAction } from '../actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
-function SigninScreen(props) {
+function RegisterScreen(props) {
 
     const dispatch = useDispatch();
 
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [ConfirmPassword, setConfirmPassword] = useState('');
     const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-    const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo, loading, error } = userSignin;
+    const userRegister = useSelector((state) => state.userSignup);
+    const { userInfo, loading, error } = userRegister;
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // Signin Action
-        dispatch(signinAction(email, password));
+        if (password !== ConfirmPassword) {
+            alert('Passwords dont match');
+        } else {
+            // Register Action
+            dispatch(registerAction(name, email, password));
+        }
     };
     // Redirect
     useEffect(() => {
@@ -32,7 +38,16 @@ function SigninScreen(props) {
         <div>
             <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <h1>Iniciar Sesión</h1>
+                    <h1>Registrar usuario</h1>
+                </div>
+                <div>
+                    <label htmlFor="email">Nombre</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Ingresa tu nombre"
+                        onChange={e => setName(e.target.value)}
+                    />
                 </div>
                 <div>
                     <label htmlFor="email">Correo Electrónico</label>
@@ -53,8 +68,17 @@ function SigninScreen(props) {
                     />
                 </div>
                 <div>
+                    <label htmlFor="confirmPass">Confirmar Contraseña</label>
+                    <input
+                        type="password"
+                        id="confirmPass"
+                        placeholder="Confirma tu contraseña"
+                        onChange={e => setConfirmPassword(e.target.value)}
+                    />
+                </div>
+                <div>
                     <label htmlFor="">
-                        <button className="primary" type="submit">Ingresar</button>
+                        <button className="primary" type="submit">Registrar</button>
                     </label>
                     {loading && <LoadingBox></LoadingBox>}
                     {error && <MessageBox variant="danger">{error}</MessageBox>}
@@ -62,8 +86,8 @@ function SigninScreen(props) {
                 <div>
                     <label htmlFor="">
                         <div>
-                            ¿No tienes cuenta? {' '}
-                            <Link to={`/signup?redirect=${redirect}`}>¡Crea una!</Link>
+                            Si ya tienes cuenta, {' '}
+                            <Link to={`/signin?redirect=${redirect}`}>¡Inicia sesión aquí!</Link>
                         </div>
                     </label>
                 </div>
@@ -72,4 +96,4 @@ function SigninScreen(props) {
     );
 }
 
-export default SigninScreen;
+export default RegisterScreen;

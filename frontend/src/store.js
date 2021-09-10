@@ -1,26 +1,31 @@
-import{applyMiddleware, combineReducers, compose, createStore} from 'redux';
-import {productDetailsReducer, productListReducer} from './reducers/productReducers';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import { productDetailsReducer, productListReducer } from './reducers/productReducers';
 import thunk from 'redux-thunk';
 import { cartReducer } from './reducers/cartReducers';
-import { userSigninReducer } from './reducers/userReducer';
+import { userSigninReducer, userSignupReducer } from './reducers/userReducer';
 
 const initialState = {
-    userSignin:{
-        userInfo: localStorage.getItem('userInfo')?
-        JSON.parse(localStorage.getItem('userInfo')):
-        null
+    userSignin: {
+        userInfo: localStorage.getItem('userInfo') ?
+            JSON.parse(localStorage.getItem('userInfo')) :
+            null
     },
-    cart:{
-        cartItems: localStorage.getItem('cartItems')?
-        JSON.parse(localStorage.getItem('cartItems')):
-        []
+    cart: {
+        cartItems: localStorage.getItem('cartItems') ?
+            JSON.parse(localStorage.getItem('cartItems')) :
+            [],
+        shippingAddress: localStorage.getItem('shippingAddress') ?
+            JSON.parse(localStorage.getItem('shippingAddress')) :
+            {},
+        paymentMethod: 'Paypal'
     }
 };
 const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
     cart: cartReducer,
-    userSignin: userSigninReducer
+    userSignin: userSigninReducer,
+    userSignup: userSignupReducer
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

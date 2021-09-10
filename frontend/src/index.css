@@ -32,6 +32,7 @@ body{
 header{
   grid-area: header;
   background-color: #203040;
+  padding: 0.5rem;
 }
 main{
   grid-area: main;
@@ -58,14 +59,17 @@ a{
 a:hover{
   color: #ff8000;
 }
+
 ul{
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
+
 li{
   margin-top: 1rem;
 }
+
 input, 
 select, 
 textarea,
@@ -80,6 +84,7 @@ button{
   background-color: #f8f8f8;
   cursor: pointer;
 }
+
 button{
   background-color: #f8f8f8;
   cursor: pointer;
@@ -89,7 +94,7 @@ input:hover,
 select:hover, 
 textarea:hover,
 button:hover{
-  border: 0.1rem #404040 solid;
+  border: 0.1rem #f0c040 solid;
 }
 
 button.primary{
@@ -106,19 +111,22 @@ header a{
   padding: 1rem;
   color: #ffff;
 }
+
 a.brand{
   color: #ffff;
   font-size: 3rem;
   font-weight: bold;
 }
+
 .badge{
   background-color: #f02020;
   color: #ffff;
   border-radius: 50%;
-  padding: 0.2rem 0.7rem;
+  padding: 0.2rem 0.65rem;
   font-size: 1.4rem;
   margin-left: 0.2rem;
 }
+
 .row{
   display: flex;
   flex-wrap: wrap;
@@ -148,10 +156,12 @@ a.brand{
 img{
   border-radius: 0.5rem;
 }
+
 img.small{
   max-width: 5rem;
   width: 100%;
 }
+
 img.medium{
   max-width: 29rem;
   width: 100%;
@@ -188,6 +198,10 @@ img.large{
 }
 
 /* Alert */
+
+.loading{
+  display: block !important;
+}
 
 .success{
   color: #20a020;
@@ -226,7 +240,6 @@ img.large{
 
 .form label {
   margin: 1rem 0;
-  display: block;
 }
 
 /* Dropdown */
@@ -248,4 +261,19 @@ img.large{
 }
 .dropdown:hover .dropdown-content{
   display: block;
+}
+
+/*Checkout Steps*/
+
+.checkout-steps > div{
+  border-top: 0.3rem #c0c0c0 solid;
+  color: #c0c0c0;
+  flex: 1;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.checkout-steps > div.active{
+  border-top-color: #ff8000;
+  color: #ff8000;
 }
