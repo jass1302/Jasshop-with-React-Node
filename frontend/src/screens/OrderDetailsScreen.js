@@ -32,10 +32,8 @@ export default function OrderDetailsScreen(props) {
                                             <strong>Name:</strong> {order.shippingAddress.FullName}<br />
                                             <strong>Dirección:</strong> {order.shippingAddress.Address}, {order.shippingAddress.City}, {order.shippingAddress.CP}, {order.shippingAddress.Country}
                                         </p>
-                                        {
-                                            order.isDelivered ? <MessageBox variant="success">Entregado el {order.deliveredAt}</MessageBox> :
-                                                <MessageBox variant="danger">Pendiente de entrega</MessageBox>
-                                        }
+                                        {order.isDelivered ? <MessageBox variant="success">Entregado el {order.deliveredAt}</MessageBox> :
+                                            <MessageBox variant="danger">Pendiente de entrega</MessageBox>}
                                     </div>
                                 </li>
                                 <li>
@@ -45,6 +43,8 @@ export default function OrderDetailsScreen(props) {
                                             <strong>Metodo de pago:</strong>
                                             {order.paymentMethod}
                                         </p>
+                                        {order.isPaid ? <MessageBox variant="success">Pago recibido el {order.paidAt}</MessageBox> :
+                                            <MessageBox variant="danger">Pago por efectuar</MessageBox>}
                                     </div>
                                 </li>
                                 <li>
