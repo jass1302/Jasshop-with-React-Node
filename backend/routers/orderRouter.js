@@ -7,14 +7,16 @@ const orderRouter = express.Router();
 
 orderRouter.post('/', isAuth, expressAsyncHandler(
     async (req, res) => {
-        if (req.body.orderItems.lenght === 0) {
+        console.log(req.body);
+        if (req.body.cartItems.length === 0) {
             res.status(400).send({ message: 'No se agregaron artículos al carrito.' });
         } else {
             const order = new Order({
-                orderItems: req.body.orderItems,
+                orderItems: req.body.cartItems,
                 shippingAddress: req.body.shippingAddress,
                 paymentMethod: req.body.paymentMethod,
                 shippingPrice: req.body.shippingPrice,
+                itemsPrice: req.body.itemsPrice,
                 taxPrice: req.body.taxPrice,
                 totalPrice: req.body.totalPrice,
                 user: req.user._id,
