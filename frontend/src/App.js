@@ -2,9 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signoutAction } from './actions/userActions';
+import { ORDER_PAY_RESET } from './constants/orderConstants';
 import CartScreen from './screens/CartScreen';
 import HomeScreen from './screens/HomeScreen';
 import OrderDetailsScreen from './screens/OrderDetailsScreen';
+import OrderHistoryScreen from './screens/orderHistoryScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import ProductScreen from './screens/ProductScreen';
@@ -46,7 +48,8 @@ function App() {
                 <div className="dropdown">
                   <Link to="#">{userInfo.name} <i className="fa fa-caret-down"></i> </Link>
                   <ul className="dropdown-content">
-                    <Link to="#signout" onClick={signoutHandler}>Salir</Link>
+                    <li><Link to="myorders">Mis ordenes</Link></li>
+                    <li><Link to="#signout" onClick={signoutHandler}>Salir</Link></li>
                   </ul>
                 </div>
               ) : (
@@ -67,6 +70,7 @@ function App() {
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/admin" component={TemporalScreen}></Route>
           <Route path="/order/:id" component={OrderDetailsScreen}></Route>
+          <Route path="/myorders" component={OrderHistoryScreen}></Route>
         </main>
         <footer className="row center">Desarrollo en progreso por: Jassiel Hernández</footer>
       </div>

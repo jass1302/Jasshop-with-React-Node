@@ -7,7 +7,6 @@ const orderRouter = express.Router();
 
 orderRouter.post('/', isAuth, expressAsyncHandler(
     async (req, res) => {
-        console.log(req.body);
         if (req.body.cartItems.length === 0) {
             res.status(400).send({ message: 'No se agregaron artículos al carrito.' });
         } else {
@@ -26,6 +25,13 @@ orderRouter.post('/', isAuth, expressAsyncHandler(
         }
     }
 ));
+
+orderRouter.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
+    console.log('uwu');
+    const orders = await Order.find({ user: req.user._id });
+    res.send(orders);
+
+}));
 
 orderRouter.get('/:id', isAuth, expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);

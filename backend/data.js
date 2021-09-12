@@ -1,17 +1,17 @@
 import bcrypt from 'bcryptjs';
 
 const data = {
-    users:[
+    users: [
         {
             name: 'Jassiel',
             email: 'admin@jasshop.com',
-            pass: bcrypt.hashSync('rootpass',8),
+            pass: bcrypt.hashSync('rootpass', 8),
             isAdmin: true,
         },
         {
             name: 'Ernesto',
             email: 'test@jasshop.com',
-            pass: bcrypt.hashSync('rootpass',8),
+            pass: bcrypt.hashSync('rootpass', 8),
             isAdmin: false,
         },
 
@@ -27,7 +27,7 @@ const data = {
             rating: 4.5,
             numReviews: 57,
             stock: 10,
-            desc: 'Diseñada por el mismísimo Satoshi Tajiri'
+            desc: 'Diseñada por el mismísimo Satoshi Tajiri',
         },
         {
             //_id: '2',
