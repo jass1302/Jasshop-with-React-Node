@@ -2,10 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { orderDetails } from '../actions/orderActions';
+import { orderDetails, payOrder } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { PayPalButton } from 'react-paypal-button-v2';
+import { ORDER_PAY_RESET } from '../constants/orderConstants';
 
 
 export default function OrderDetailsScreen(props) {
@@ -14,7 +15,8 @@ export default function OrderDetailsScreen(props) {
     const detailsOrder = useSelector((state) => state.orderDetails);
 
     const { order, loading, error } = detailsOrder;
-
+    const orderPay = useSelector((state) => state.orderPay);
+    const { loading: loadingPay, error: errorPay, success: successPay } = orderPay;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,14 +24,15 @@ export default function OrderDetailsScreen(props) {
             const { data } = await axios.get('/api/config/paypal');
             const script = document.createElement('script');
             script.type = "text/javascript";
-            script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+            script.src = `https://www.paypal.com/sdk/js?client-id=${data}&currency=MXN`;
             script.async = true;
             script.onload = () => {
                 setSdkReady(true);
             };
             document.body.appendChild(script);
         };
-        if (!order) {
+        if (!order || successPay || (order && order._id !== orderId)) {
+            dispatch({ type: ORDER_PAY_RESET });
             dispatch(orderDetails(orderId));
         } else {
             if (!order.isPaid) {
@@ -42,8 +45,9 @@ export default function OrderDetailsScreen(props) {
         }
     }, [dispatch, orderId, order, sdkReady]);
 
-    const successPaymentHandler = () => {
-        //as
+    const successPaymentHandler = (paymentResult) => {
+        //Payment Action
+        dispatch(payOrder(order, paymentResult));
     };
 
     return loading ? < LoadingBox ></LoadingBox > :
@@ -132,8 +136,14 @@ export default function OrderDetailsScreen(props) {
                                             <li>
                                                 {!sdkReady ? (<LoadingBox></LoadingBox>) :
                                                     (
-
-                                                        <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler}> </PayPalButton>
+                                                        <>
+                                                            {errorPay && <MessageBox variant="danger">{errorPay}</MessageBox>}
+                                                            {loadingPay && <LoadingBox></LoadingBox>}
+                                                            <PayPalButton
+                                                                amount={order.totalPrice}
+                                                                currency='MXN'
+                                                                onSuccess={successPaymentHandler}> </PayPalButton>
+                                                        </>
                                                     )}
                                             </li>
                                         )
@@ -144,7 +154,7 @@ export default function OrderDetailsScreen(props) {
                         </div>
                     </div>
 
-                </div>
+                </div >
             )
 }
 
