@@ -27,7 +27,6 @@ orderRouter.post('/', isAuth, expressAsyncHandler(
 ));
 
 orderRouter.get('/mine', isAuth, expressAsyncHandler(async (req, res) => {
-    console.log('uwu');
     const orders = await Order.find({ user: req.user._id });
     res.send(orders);
 
